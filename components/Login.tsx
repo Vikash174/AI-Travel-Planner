@@ -3,10 +3,12 @@ import React from "react";
 import { Colors } from "@/constants/Colors";
 import { StatusBar } from "expo-status-bar";
 import { isTablet } from "@/utility-functions/responsive";
+import { useRouter } from "expo-router";
 
 const isTabletView = isTablet();
 
 export default function Login() {
+  const router = useRouter();
   return (
     <View style={styles.container}>
       <StatusBar style="dark" backgroundColor={Colors.white} hidden />
@@ -20,8 +22,11 @@ export default function Login() {
           Discover your next adventure effortlessly. Personalized itinerary
           plans created by AI.
         </Text>
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>Sign in with Google</Text>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => router.push("/auth/sign-in")}
+        >
+          <Text style={styles.buttonText}>Get Started</Text>
         </TouchableOpacity>
       </View>
     </View>
