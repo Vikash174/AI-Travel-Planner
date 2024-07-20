@@ -1,6 +1,15 @@
-import { Text, View } from "react-native";
+import Login from "@/components/Login";
+import { Colors } from "@/constants/Colors";
+import { useFonts } from "expo-font";
+import { StatusBar, Text, View } from "react-native";
 
 export default function Index() {
+  useFonts({
+    outfit: require("../assets/fonts/Outfit-Regular.ttf"),
+    "outfit-bold": require("../assets/fonts/Outfit-Bold.ttf"),
+    "outfit-Medium": require("../assets/fonts/Outfit-Medium.ttf"),
+  });
+
   return (
     <View
       style={{
@@ -9,7 +18,8 @@ export default function Index() {
         alignItems: "center",
       }}
     >
-      <Text>Edit app/index.tsx to edit this screen.</Text>
+      <StatusBar barStyle="dark-content" backgroundColor={Colors.primary} />
+      <Login />
     </View>
   );
 }
