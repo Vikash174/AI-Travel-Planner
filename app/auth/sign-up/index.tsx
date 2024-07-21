@@ -3,15 +3,24 @@ import {
   Text,
   TextInput,
   StyleSheet,
-  Dimensions,
   TouchableOpacity,
 } from "react-native";
 import React, { useEffect } from "react";
 import { useNavigation, useRouter } from "expo-router";
 import { Colors } from "@/constants/Colors";
 import { isTablet } from "@/utility-functions/responsive";
+import { Ionicons } from "@expo/vector-icons";
+import { Formik } from "formik";
+import { signUpValidationSchema } from "@/schemas/validationSchema";
 
 const isTabletView = isTablet();
+
+const initialValues = {
+  fullName: "",
+  email: "",
+  password: "",
+  confirmPassword: "",
+};
 
 export default function SignUp() {
   const navigation = useNavigation();
@@ -22,35 +31,79 @@ export default function SignUp() {
     });
   }, [navigation]);
 
+  const handleSubmit = (values: { email: string; password: string }) => {
+    console.log("form values", values);
+  };
+
   return (
     <View style={styles.container}>
+      <TouchableOpacity style={styles.backButton} onPress={() => router.back()}>
+        <Ionicons name="arrow-back" size={24} color="black" />
+      </TouchableOpacity>
       <Text style={styles.heading}>Create New Account</Text>
 
-      {/* Full Name */}
-      <View style={styles.inputContainer}>
-        <Text style={styles.label}>Full Name</Text>
-        <TextInput style={styles.input} placeholder="Enter your Full Name" />
-      </View>
+      <Formik
+        initialValues={initialValues}
+        validationSchema={signUpValidationSchema}
+        onSubmit={handleSubmit}
+      >
+        {({ handleChange, handleBlur, handleSubmit, values, errors }) => (
+          <>
+            {/* Full Name */}
+            <View style={styles.inputContainer}>
+              <Text style={styles.label}>Full Name</Text>
+              <TextInput
+                style={styles.input}
+                placeholder="Enter your Full Name"
+                onChangeText={handleChange("fullName")}
+                onBlur={handleBlur("fullName")}
+                value={values.fullName}
+              />
+              {errors.fullName && (
+                <Text style={styles.errorText}>{errors.fullName}</Text>
+              )}
+            </View>
 
-      {/* Email */}
-      <View style={styles.inputContainer}>
-        <Text style={styles.label}>Email</Text>
-        <TextInput style={styles.input} placeholder="Enter your email" />
-      </View>
+            {/* Email */}
+            <View style={styles.inputContainer}>
+              <Text style={styles.label}>Email</Text>
+              <TextInput
+                style={styles.input}
+                placeholder="Enter your email"
+                onChangeText={handleChange("email")}
+                onBlur={handleBlur("email")}
+                value={values.email}
+              />
+              {errors.email && (
+                <Text style={styles.errorText}>{errors.email}</Text>
+              )}
+            </View>
 
-      {/* Password */}
-      <View style={styles.inputContainer}>
-        <Text style={styles.label}>Password</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Enter your password"
-          secureTextEntry
-        />
-      </View>
+            {/* Password */}
+            <View style={styles.inputContainer}>
+              <Text style={styles.label}>Password</Text>
+              <TextInput
+                style={styles.input}
+                placeholder="Enter your password"
+                secureTextEntry
+                onChangeText={handleChange("password")}
+                onBlur={handleBlur("password")}
+                value={values.password}
+              />
+              {errors.password && (
+                <Text style={styles.errorText}>{errors.password}</Text>
+              )}
+            </View>
 
-      <TouchableOpacity style={styles.button}>
-        <Text style={styles.buttonText}>Create Account</Text>
-      </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => handleSubmit}
+            >
+              <Text style={styles.buttonText}>Create Account</Text>
+            </TouchableOpacity>
+          </>
+        )}
+      </Formik>
     </View>
   );
 }
@@ -115,6 +168,18 @@ const styles = StyleSheet.create({
   info: {
     marginTop: 20,
     marginBottom: -10,
+    fontFamily: "outfit",
+  },
+  backButton: {
+    position: "absolute",
+    top: 20,
+    left: 20,
+    zIndex: 1,
+  },
+  errorText: {
+    color: "red",
+    fontSize: isTabletView ? 14 : 12,
+    marginTop: 5,
     fontFamily: "outfit",
   },
 });

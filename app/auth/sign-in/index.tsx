@@ -5,13 +5,22 @@ import {
   StyleSheet,
   Dimensions,
   TouchableOpacity,
+  GestureResponderEvent,
 } from "react-native";
 import React, { useEffect } from "react";
 import { useNavigation, useRouter } from "expo-router";
 import { Colors } from "@/constants/Colors";
 import { isTablet } from "@/utility-functions/responsive";
+import { Ionicons } from "@expo/vector-icons";
+import { Formik } from "formik";
+import * as Yup from "yup";
+import { baseValidationSchema } from "@/schemas/validationSchema";
 
 const isTabletView = isTablet();
+const initialValues = {
+  email: "",
+  password: "",
+};
 
 export default function SignIn() {
   const navigation = useNavigation();
@@ -22,31 +31,72 @@ export default function SignIn() {
     });
   }, [navigation]);
 
+  const handleSubmit = (values: { email: string; password: string }) => {
+    console.log("form values", values);
+  };
   return (
     <View style={styles.container}>
+      <TouchableOpacity style={styles.backButton} onPress={() => router.back()}>
+        <Ionicons name="arrow-back" size={24} color="black" />
+      </TouchableOpacity>
       <Text style={styles.title}>Welcome Back</Text>
       <Text style={styles.subtitle}>You've been missed!</Text>
       <Text style={styles.heading}>Let's Sign You In</Text>
 
-      {/* Email */}
-      <View style={styles.inputContainer}>
-        <Text style={styles.label}>Email</Text>
-        <TextInput style={styles.input} placeholder="Enter your email" />
-      </View>
+      <Formik
+        initialValues={initialValues}
+        validationSchema={baseValidationSchema}
+        onSubmit={handleSubmit}
+      >
+        {({
+          handleChange,
+          handleBlur,
+          handleSubmit,
+          values,
+          touched,
+          errors,
+        }) => (
+          <>
+            {/* Email */}
+            <View style={styles.inputContainer}>
+              <Text style={styles.label}>Email</Text>
+              <TextInput
+                style={styles.input}
+                placeholder="Enter your email"
+                onChangeText={handleChange("email")}
+                onBlur={handleBlur("email")}
+                value={values.email}
+              />
+              {errors.email && touched.email && (
+                <Text style={styles.errorText}>{errors.email}</Text>
+              )}
+            </View>
 
-      {/* Password */}
-      <View style={styles.inputContainer}>
-        <Text style={styles.label}>Password</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Enter your password"
-          secureTextEntry
-        />
-      </View>
+            {/* Password */}
+            <View style={styles.inputContainer}>
+              <Text style={styles.label}>Password</Text>
+              <TextInput
+                style={styles.input}
+                placeholder="Enter your password"
+                secureTextEntry
+                onChangeText={handleChange("password")}
+                onBlur={handleBlur("password")}
+                value={values.password}
+              />
+              {errors.password && touched.password && (
+                <Text style={styles.errorText}>{errors.password}</Text>
+              )}
+            </View>
 
-      <TouchableOpacity style={styles.button}>
-        <Text style={styles.buttonText}>Sign In</Text>
-      </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => handleSubmit()}
+            >
+              <Text style={styles.buttonText}>Sign In</Text>
+            </TouchableOpacity>
+          </>
+        )}
+      </Formik>
 
       <View style={styles.info}>
         <Text>New to this app?</Text>
@@ -122,6 +172,18 @@ const styles = StyleSheet.create({
   info: {
     marginTop: 20,
     marginBottom: -10,
+    fontFamily: "outfit",
+  },
+  backButton: {
+    position: "absolute",
+    top: 20,
+    left: 20,
+    zIndex: 1,
+  },
+  errorText: {
+    color: "red",
+    fontSize: isTabletView ? 14 : 12,
+    marginTop: 5,
     fontFamily: "outfit",
   },
 });
