@@ -15,6 +15,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import { baseValidationSchema } from "@/schemas/validationSchema";
+import { NavigationProp } from "@react-navigation/native";
 
 const isTabletView = isTablet();
 const initialValues = {
@@ -22,11 +23,15 @@ const initialValues = {
   password: "",
 };
 
-export default function SignIn() {
-  const navigation = useNavigation();
+interface SignInProps {
+  navigation?: NavigationProp<any>;
+}
+
+export default function SignIn({ navigation: propNavigation }: SignInProps) {
+  const navigation = propNavigation || useNavigation();
   const router = useRouter();
   useEffect(() => {
-    navigation.setOptions({
+    navigation?.setOptions({
       headerShown: false,
     });
   }, [navigation]);
@@ -36,7 +41,11 @@ export default function SignIn() {
   };
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.backButton} onPress={() => router.back()}>
+      <TouchableOpacity
+        style={styles.backButton}
+        onPress={() => router.back()}
+        testID="back-button"
+      >
         <Ionicons name="arrow-back" size={24} color="black" />
       </TouchableOpacity>
       <Text style={styles.title}>Welcome Back</Text>
