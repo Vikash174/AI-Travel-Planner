@@ -10,7 +10,7 @@ import {
 import React, { useEffect } from "react";
 import { useNavigation, useRouter } from "expo-router";
 import { Colors } from "@/constants/Colors";
-import { isTablet } from "@/utility-functions/responsive";
+import { isTablet } from "@/src/utility-functions/responsive";
 import { Ionicons } from "@expo/vector-icons";
 import { Formik } from "formik";
 import * as Yup from "yup";

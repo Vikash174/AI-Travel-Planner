@@ -2,7 +2,7 @@ import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 import React from "react";
 import { Colors } from "@/constants/Colors";
 import { StatusBar } from "expo-status-bar";
-import { isTablet } from "@/utility-functions/responsive";
+import { isTablet } from "@/src/utility-functions/responsive";
 import { useRouter } from "expo-router";
 
 const isTabletView = isTablet();
@@ -13,7 +13,7 @@ export default function Login() {
     <View style={styles.container}>
       <StatusBar style="dark" backgroundColor={Colors.white} hidden />
       <Image
-        source={require("../assets/images/login-image.jpeg")}
+        source={require("../../assets/images/login-image2.jpeg")}
         style={styles.image}
       />
       <View style={styles.bottomSheet}>

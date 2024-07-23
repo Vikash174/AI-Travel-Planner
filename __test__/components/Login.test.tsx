@@ -1,10 +1,10 @@
 import * as Device from "expo-device";
-import * as responsive from "@/utility-functions/responsive";
+import * as responsive from "@/src/utility-functions/responsive";
 import { render, screen } from "@testing-library/react-native";
-import Login from "../Login";
+import Login from "../../src/components/Login";
 
 // Mock device functions
-jest.mock("@/utility-functions/responsive", () => ({
+jest.mock("../../src/utility-functions/responsive", () => ({
   isTablet: jest.fn(),
 }));
 
@@ -25,7 +25,7 @@ describe("Login component", () => {
     expect(
       screen.getByText(/Discover your next adventure effortlessly/i)
     ).toBeTruthy();
-    expect(screen.getByText("Sign in with Google")).toBeTruthy();
+    expect(screen.getByText("Get Started")).toBeTruthy();
   });
 
   test("renders correctly on tablet", () => {
@@ -41,6 +41,6 @@ describe("Login component", () => {
     expect(
       screen.getByText(/Discover your next adventure effortlessly/i)
     ).toBeTruthy();
-    expect(screen.getByText("Sign in with Google")).toBeTruthy();
+    expect(screen.getByText("Get Started")).toBeTruthy();
   });
 });

@@ -1,4 +1,4 @@
-import Login from "@/components/Login";
+import Login from "@/src/components/Login";
 import { Colors } from "@/constants/Colors";
 import { useFonts } from "expo-font";
 import { StatusBar, Text, View } from "react-native";

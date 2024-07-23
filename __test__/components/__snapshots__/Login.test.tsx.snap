@@ -87,7 +87,7 @@ exports[`Login component renders correctly on phone 1`] = `
       }
       accessible={true}
       collapsable={false}
-      focusable={false}
+      focusable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
@@ -116,7 +116,7 @@ exports[`Login component renders correctly on phone 1`] = `
           }
         }
       >
-        Sign in with Google
+        Get Started
       </Text>
     </View>
   </View>
@@ -210,7 +210,7 @@ exports[`Login component renders correctly on tablet 1`] = `
       }
       accessible={true}
       collapsable={false}
-      focusable={false}
+      focusable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
@@ -239,7 +239,7 @@ exports[`Login component renders correctly on tablet 1`] = `
           }
         }
       >
-        Sign in with Google
+        Get Started
       </Text>
     </View>
   </View>
