@@ -3,6 +3,8 @@ import { Colors } from "@/constants/Colors";
 import { useFonts } from "expo-font";
 import { StatusBar, Text, View } from "react-native";
 import Toast from "react-native-toast-message";
+import { auth } from "@/configs/FirebaseConfig";
+import { Redirect } from "expo-router";
 
 export default function Index() {
   useFonts({
@@ -10,6 +12,8 @@ export default function Index() {
     "outfit-bold": require("../assets/fonts/Outfit-Bold.ttf"),
     "outfit-Medium": require("../assets/fonts/Outfit-Medium.ttf"),
   });
+
+  const user = auth.currentUser;
 
   return (
     <>
@@ -20,8 +24,17 @@ export default function Index() {
           alignItems: "center",
         }}
       >
-        <StatusBar barStyle="dark-content" backgroundColor={Colors.primary} />
-        <Login />
+        {user ? (
+          <Redirect href={"/mytrip"} />
+        ) : (
+          <>
+            <StatusBar
+              barStyle="dark-content"
+              backgroundColor={Colors.primary}
+            />
+            <Login />
+          </>
+        )}
       </View>
       <Toast />
     </>

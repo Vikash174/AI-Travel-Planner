@@ -44,6 +44,7 @@ export default function SignIn({ navigation: propNavigation }: SignInProps) {
         // Signed in
         const user = userCredential.user;
         console.log("user signed in sucessfully");
+        router.replace("/mytrip");
 
         // ...
       })

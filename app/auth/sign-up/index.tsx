@@ -14,7 +14,6 @@ import { Formik } from "formik";
 import { signUpValidationSchema } from "@/schemas/validationSchema";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../../configs/FirebaseConfig";
-import LoadingButton from "@/src/components/common/LoadingButton";
 import Toast from "react-native-toast-message";
 
 const isTabletView = isTablet();
@@ -54,6 +53,7 @@ export default function SignUp() {
           topOffset: 30,
           bottomOffset: 40,
         });
+        router.replace("/mytrip");
       })
       .catch((error) => {
         const errorCode = error.code;
