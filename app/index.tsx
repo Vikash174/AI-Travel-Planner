@@ -2,6 +2,7 @@ import Login from "@/src/components/Login";
 import { Colors } from "@/constants/Colors";
 import { useFonts } from "expo-font";
 import { StatusBar, Text, View } from "react-native";
+import Toast from "react-native-toast-message";
 
 export default function Index() {
   useFonts({
@@ -11,15 +12,18 @@ export default function Index() {
   });
 
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <StatusBar barStyle="dark-content" backgroundColor={Colors.primary} />
-      <Login />
-    </View>
+    <>
+      <View
+        style={{
+          flex: 1,
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <StatusBar barStyle="dark-content" backgroundColor={Colors.primary} />
+        <Login />
+      </View>
+      <Toast />
+    </>
   );
 }

@@ -21,10 +21,6 @@ const signUpValidationSchema = baseValidationSchema.shape({
   fullName: Yup.string()
     .min(2, 'Full Name must be at least 2 characters')
     .required('Full Name is required'),
-
-  confirmPassword: Yup.string()
-    .oneOf([Yup.ref('password'), ''], 'Passwords must match')
-    .required('Confirm Password is required'),
 });
 
 // Export schemas for use in different forms

@@ -12,6 +12,10 @@ import { isTablet } from "@/src/utility-functions/responsive";
 import { Ionicons } from "@expo/vector-icons";
 import { Formik } from "formik";
 import { signUpValidationSchema } from "@/schemas/validationSchema";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../../configs/FirebaseConfig";
+import LoadingButton from "@/src/components/common/LoadingButton";
+import Toast from "react-native-toast-message";
 
 const isTabletView = isTablet();
 
@@ -19,7 +23,6 @@ const initialValues = {
   fullName: "",
   email: "",
   password: "",
-  confirmPassword: "",
 };
 
 export default function SignUp() {
@@ -31,8 +34,37 @@ export default function SignUp() {
     });
   }, [navigation]);
 
-  const handleSubmit = (values: { email: string; password: string }) => {
-    console.log("form values", values);
+  const signUpNewUser = (values: {
+    fullName: string;
+    email: string;
+    password: string;
+  }) => {
+    console.log("inside submit", values);
+
+    createUserWithEmailAndPassword(auth, values.email, values.password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        console.log(user, "user created");
+        Toast.show({
+          type: "success",
+          text1: "Account created successfully",
+          position: "bottom",
+          visibilityTime: 3000,
+          autoHide: true,
+          topOffset: 30,
+          bottomOffset: 40,
+        });
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode, errorMessage);
+        Toast.show({
+          type: "error",
+          text1: "Error",
+          text2: errorMessage,
+        });
+      });
   };
 
   return (
@@ -45,7 +77,7 @@ export default function SignUp() {
       <Formik
         initialValues={initialValues}
         validationSchema={signUpValidationSchema}
-        onSubmit={handleSubmit}
+        onSubmit={signUpNewUser}
       >
         {({ handleChange, handleBlur, handleSubmit, values, errors }) => (
           <>
@@ -97,7 +129,7 @@ export default function SignUp() {
 
             <TouchableOpacity
               style={styles.button}
-              onPress={() => handleSubmit}
+              onPress={() => handleSubmit()}
             >
               <Text style={styles.buttonText}>Create Account</Text>
             </TouchableOpacity>

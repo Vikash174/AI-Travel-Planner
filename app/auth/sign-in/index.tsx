@@ -16,6 +16,8 @@ import { Formik } from "formik";
 import * as Yup from "yup";
 import { baseValidationSchema } from "@/schemas/validationSchema";
 import { NavigationProp } from "@react-navigation/native";
+import { auth } from "@/configs/FirebaseConfig";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 const isTabletView = isTablet();
 const initialValues = {
@@ -36,8 +38,20 @@ export default function SignIn({ navigation: propNavigation }: SignInProps) {
     });
   }, [navigation]);
 
-  const handleSubmit = (values: { email: string; password: string }) => {
-    console.log("form values", values);
+  const handleSubmit = (values: typeof initialValues) => {
+    signInWithEmailAndPassword(auth, values.email, values.password)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        console.log("user signed in sucessfully");
+
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorMessage);
+      });
   };
   return (
     <View style={styles.container}>
