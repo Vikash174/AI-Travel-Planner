@@ -172,7 +172,7 @@ const styles = StyleSheet.create({
   },
   input: {
     borderWidth: 1,
-    borderColor: "black",
+    borderColor: Colors.light.inputBorder,
     padding: isTabletView ? 12 : 8,
     borderRadius: 5,
     width: "100%",

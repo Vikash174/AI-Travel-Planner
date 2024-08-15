@@ -24,3 +24,5 @@ android
 ios
 
 FirebaseConfig.ts
+
+.env
