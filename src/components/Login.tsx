@@ -11,7 +11,7 @@ export default function Login() {
   const router = useRouter();
   return (
     <View style={styles.container}>
-      <StatusBar style="dark" backgroundColor={Colors.white} hidden />
+      <StatusBar style="dark" backgroundColor={Colors.light.primary} hidden />
       <Image
         source={require("../../assets/images/login-image2.jpeg")}
         style={styles.image}
@@ -36,7 +36,7 @@ export default function Login() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.white,
+    backgroundColor: Colors.light.background,
     width: "100%",
   },
   image: {
@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
   },
   bottomSheet: {
     flex: 1,
-    backgroundColor: Colors.white,
+    backgroundColor: Colors.light.background,
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
     padding: 20,
@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
     marginBottom: 30,
   },
   button: {
-    backgroundColor: Colors.primary,
+    backgroundColor: Colors.light.primary,
     borderRadius: 30,
     paddingVertical: 15,
     paddingHorizontal: 30,
@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
     width: isTabletView ? 300 : "100%",
   },
   buttonText: {
-    color: Colors.white,
+    color: Colors.light.background,
     fontSize: isTabletView ? 20 : 15,
     fontFamily: "outfit",
   },

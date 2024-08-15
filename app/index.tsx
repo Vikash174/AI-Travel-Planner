@@ -4,7 +4,8 @@ import { useFonts } from "expo-font";
 import { StatusBar, Text, View } from "react-native";
 import Toast from "react-native-toast-message";
 import { auth } from "@/configs/FirebaseConfig";
-import { Redirect } from "expo-router";
+import { Redirect, useNavigation } from "expo-router";
+import { useEffect } from "react";
 
 export default function Index() {
   useFonts({
@@ -14,6 +15,13 @@ export default function Index() {
   });
 
   const user = auth.currentUser;
+  const navination = useNavigation();
+
+  useEffect(() => {
+    navination.setOptions({
+      headerShown: false,
+    });
+  }, []);
 
   return (
     <>
@@ -30,7 +38,7 @@ export default function Index() {
           <>
             <StatusBar
               barStyle="dark-content"
-              backgroundColor={Colors.primary}
+              backgroundColor={Colors.light.primary}
             />
             <Login />
           </>

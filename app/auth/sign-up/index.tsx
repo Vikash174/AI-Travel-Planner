@@ -176,7 +176,7 @@ const styles = StyleSheet.create({
   },
   input: {
     borderWidth: 1,
-    borderColor: Colors.light.inputBorderColor,
+    borderColor: Colors.light.inputBorder,
     padding: isTabletView ? 12 : 8,
     borderRadius: 5,
     width: "100%",
@@ -184,7 +184,7 @@ const styles = StyleSheet.create({
     fontFamily: "outfit",
   },
   button: {
-    backgroundColor: Colors.primary,
+    backgroundColor: Colors.light.primary,
     borderRadius: 30,
     paddingVertical: isTabletView ? 20 : 15,
     paddingHorizontal: isTabletView ? 40 : 30,

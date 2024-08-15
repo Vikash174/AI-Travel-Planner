@@ -1,30 +1,38 @@
-/**
- * Below are the colors that are used in the app. The colors are defined in the light and dark mode.
- * There are many other ways to style your app. For example, [Nativewind](https://www.nativewind.dev/), [Tamagui](https://tamagui.dev/), [unistyles](https://reactnativeunistyles.vercel.app), etc.
- */
-
-const tintColorLight = '#0a7ea4';
-const tintColorDark = '#fff';
-
-export const Colors = {
+const palette = {
   primary: '#0a7ea4',
-  white:'#fff',
-  light: {
-    text: '#11181C',
-    background: '#fff',
-    tint: tintColorLight,
-    icon: '#687076',
-    tabIconDefault: '#687076',
-    tabIconSelected: tintColorLight,
-    inputBorderColor:'#9BA1A6',
-    primary:'#0a7ea4'
-  },
-  dark: {
-    text: '#ECEDEE',
-    background: '#151718',
-    tint: tintColorDark,
-    icon: '#9BA1A6',
-    tabIconDefault: '#9BA1A6',
-    tabIconSelected: tintColorDark,
+  white: '#fff',
+  black: '#000',
+  gray: {
+    100: '#ECEDEE',
+    200: '#9BA1A6',
+    300: '#687076',
+    400: '#11181C',
   },
 };
+
+export const Colors = {
+  light: {
+    primary: palette.primary,
+    background: palette.white,
+    text: palette.gray[400],
+    tint: palette.primary,
+    tabIconDefault: palette.gray[300],
+    tabIconSelected: palette.primary,
+    icon: palette.gray[300],
+    inputBorder: palette.gray[200],
+  },
+  dark: {
+    primary: palette.primary,
+    background: palette.black,
+    text: palette.gray[100],
+    tint: palette.white,
+    tabIconDefault: palette.gray[200],
+    tabIconSelected: palette.white,
+    icon: palette.gray[200],
+    inputBorder: palette.gray[300],
+  },
+};
+
+type Theme = 'light' | 'dark';
+
+export const getColors = (theme: Theme) => Colors[theme];
