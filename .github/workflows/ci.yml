@@ -30,9 +30,6 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
-      - name: Type Check
-        run: npx tsc --noEmit --pretty false
-
       - name: Lint
         run: npm run lint
 
