@@ -7,7 +7,16 @@
         "./*"
       ]
     },
-     "types": ["jest"]
+     "types": ["jest"],
+     "jsx": "react-native",
+     "target": "ESNext",
+     "allowJs": true,
+     "skipLibCheck": true,
+     "noEmit": true,
+     "allowSyntheticDefaultImports": true,
+     "resolveJsonModule": true,
+     "esModuleInterop": true,
+     "moduleResolution": "Node"
   },
   "include": [
     "**/*.ts",
@@ -16,5 +25,11 @@
     "expo-env.d.ts",
      "src/**/*",
     "__tests__/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "jest.config.js",
+    "babel.config.js",
+    "metrics.config.js",
   ]
 }
