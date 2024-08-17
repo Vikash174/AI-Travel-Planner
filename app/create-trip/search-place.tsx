@@ -27,6 +27,7 @@ export default function SearchPlace() {
     <View style={[styles.container, { backgroundColor: colors.background }]}>
       <GooglePlacesAutocomplete
         placeholder="Search Location"
+        fetchDetails={true}
         onPress={(data, details = null) => {
           // 'details' is provided when fetchDetails = true
           console.log(data, details);
