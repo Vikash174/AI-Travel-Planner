@@ -18,29 +18,20 @@ jobs:
         with:
           node-version: "16"
 
-      - name: Display package.json
-        run: cat package.json
+      - name: Display directory structure
+        run: find . -maxdepth 3 -type d
 
-      - name: Display package-lock.json
-        run: cat package-lock.json
+      - name: Display tsconfig.json
+        run: cat tsconfig.json
 
-      - name: Display npm version
-        run: npm --version
-
-      - name: Clean npm cache
-        run: npm cache clean --force
-
-      - name: Remove node_modules
-        run: rm -rf node_modules
-
-      - name: Remove package-lock.json
-        run: rm -f package-lock.json
+      - name: Setup Firebase Config
+        run: cp configs/firebaseConfig.template.ts configs/firebaseConfig.ts
 
       - name: Install Dependencies
         run: npm install
 
       - name: Type Check
-        run: npx tsc --noEmit
+        run: npx tsc --noEmit --pretty false
 
       - name: Lint
         run: npm run lint
